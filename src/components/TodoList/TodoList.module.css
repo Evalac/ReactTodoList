@@ -25,9 +25,6 @@ img {
   height: auto;
 }
 
-.TodoList {
-}
-
 .TodoList__item {
   display: flex;
   align-items: center;
