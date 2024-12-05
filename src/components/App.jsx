@@ -17,8 +17,26 @@ export class App extends Component {
       todos: prevState.todos.filter(todo => todo.id !== todoId),
     }));
   };
+
+  toggleCompleted = todoId => {
+    // console.log(todoId);
+    this.setState(prevState => ({
+      todos: prevState.todos.map(todo => {
+        if (todoId === todo.id) {
+          // console.log('знайшли той туду');
+
+          return {
+            ...todo,
+            completed: !todo.completed,
+          };
+        }
+        return todo;
+      }),
+    }));
+  };
+
   render() {
-    this.test();
+    // this.test();
 
     const { todos } = this.state;
 
@@ -35,7 +53,11 @@ export class App extends Component {
           <p>Кількість ToDo: {allTodos}</p>
           <p>Кількість виконаних ToDo: {toDoComleted}</p>
         </div>
-        <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
+        <TodoList
+          todos={todos}
+          onDeleteTodo={this.deleteTodo}
+          onCompletedTodo={this.toggleCompleted}
+        />
       </>
     );
   }

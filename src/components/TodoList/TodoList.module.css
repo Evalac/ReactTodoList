@@ -34,10 +34,17 @@ img {
   border: solid 2px black;
   margin-bottom: 5px;
 }
+.TodoList__item__completed {
+  border: solid 2px greenyellow;
+}
 .button__delete {
   margin-right: 10px;
 }
 
 .text {
   margin-left: 10px;
+}
+
+.text__completed {
+  text-decoration: line-through;
 }
