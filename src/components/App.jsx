@@ -1,15 +1,21 @@
 import { Component } from 'react';
+import uniqid from 'uniqid';
 
 import { TodoList } from '../components/TodoList';
 import initialTodos from '../todos.json';
 
+import { TodoEditor } from './TodoList/TodoEditor/TodoEditor';
+import { Filter } from './TodoList/TodoFilter/TodoFilter';
+
 export class App extends Component {
   state = {
     todos: initialTodos,
+    filter: '',
   };
 
   test() {
-    console.log(this.state.todos.map(todos => todos.completed));
+    console.log(uniqid());
+    // console.log(this.state.todos.map(todos => todos.completed));
   }
 
   deleteTodo = todoId => {
@@ -35,6 +41,20 @@ export class App extends Component {
     }));
   };
 
+  addTodo = text => {
+    const todo = {
+      id: uniqid(),
+      text: text,
+      completed: false,
+    };
+
+    this.setState(prevState => ({ todos: [todo, ...prevState.todos] }));
+  };
+
+  filterTodo = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
   render() {
     // this.test();
 
@@ -47,14 +67,21 @@ export class App extends Component {
       0
     );
 
+    const filterdTodo = this.state.todos.filter(todo =>
+      todo.text.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+    console.log(filterdTodo);
+
     return (
       <>
+        <TodoEditor addTodo={this.addTodo} />
+        <Filter value={this.state.filter} filterChange={this.filterTodo} />
         <div>
           <p>Кількість ToDo: {allTodos}</p>
           <p>Кількість виконаних ToDo: {toDoComleted}</p>
         </div>
         <TodoList
-          todos={todos}
+          todos={filterdTodo}
           onDeleteTodo={this.deleteTodo}
           onCompletedTodo={this.toggleCompleted}
         />
