@@ -13,11 +13,6 @@ export class App extends Component {
     filter: '',
   };
 
-  test() {
-    console.log(uniqid());
-    // console.log(this.state.todos.map(todos => todos.completed));
-  }
-
   deleteTodo = todoId => {
     this.setState(prevState => ({
       todos: prevState.todos.filter(todo => todo.id !== todoId),
@@ -55,8 +50,26 @@ export class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
+  componentDidMount() {
+    //цей метод викликається один раз після рендеру
+    console.log(`componentDidMount`);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //цей метод викликається завжи після зміни в стейті
+    console.log(`componentDidUpdate`);
+    console.log(`prevState`, prevState);
+    console.log(`state`, this.state.todos);
+    if (this.state.todos !== prevState.todos) {
+      console.log(`Оноволись поле todos`);
+      localStorage.setItem('todos', JSON.stringify(this.state.todos));
+    }
+  }
+
   render() {
     // this.test();
+
+    console.log(`render`);
 
     const { todos } = this.state;
 
@@ -70,7 +83,6 @@ export class App extends Component {
     const filterdTodo = this.state.todos.filter(todo =>
       todo.text.toLowerCase().includes(this.state.filter.toLowerCase())
     );
-    console.log(filterdTodo);
 
     return (
       <>
