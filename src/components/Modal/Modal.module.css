@@ -1,0 +1,20 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(102, 102, 102);
+}
+
+.backDrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 200px;
+  min-width: 500px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+}

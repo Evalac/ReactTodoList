@@ -1,16 +1,25 @@
 import { Component } from 'react';
 import uniqid from 'uniqid';
+import css from './App.module.css';
 
 import { TodoList } from '../components/TodoList';
 import initialTodos from '../todos.json';
 
 import { TodoEditor } from './TodoList/TodoEditor/TodoEditor';
 import { Filter } from './TodoList/TodoFilter/TodoFilter';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
     todos: initialTodos,
     filter: '',
+    showModal: false,
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
   deleteTodo = todoId => {
@@ -52,14 +61,16 @@ export class App extends Component {
 
   componentDidMount() {
     //цей метод викликається один раз після рендеру
-    console.log(`componentDidMount`);
+    const todos = JSON.parse(localStorage.getItem('todos'));
+
+    if (todos) {
+      this.setState({ todos: todos });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
     //цей метод викликається завжи після зміни в стейті
-    console.log(`componentDidUpdate`);
-    console.log(`prevState`, prevState);
-    console.log(`state`, this.state.todos);
+
     if (this.state.todos !== prevState.todos) {
       console.log(`Оноволись поле todos`);
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
@@ -67,10 +78,6 @@ export class App extends Component {
   }
 
   render() {
-    // this.test();
-
-    console.log(`render`);
-
     const { todos } = this.state;
 
     const allTodos = todos.length;
@@ -85,7 +92,24 @@ export class App extends Component {
     );
 
     return (
-      <>
+      <div className={css.appContainer}>
+        <button type="button" onClick={this.toggleModal}>
+          Open modal
+        </button>
+        {this.state.showModal && (
+          <Modal>
+            <h1>Контент модалки як чілдрен</h1>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
+              temporibus libero consequuntur, eius deserunt nam fugit ab
+              deleniti delectus architecto excepturi, assumenda mollitia ullam
+              ipsa cupiditate fuga molestiae velit esse.
+            </p>
+            <button type="button" onClick={this.toggleModal}>
+              Close modal
+            </button>
+          </Modal>
+        )}
         <TodoEditor addTodo={this.addTodo} />
         <Filter value={this.state.filter} filterChange={this.filterTodo} />
         <div>
@@ -97,7 +121,7 @@ export class App extends Component {
           onDeleteTodo={this.deleteTodo}
           onCompletedTodo={this.toggleCompleted}
         />
-      </>
+      </div>
     );
   }
 }
