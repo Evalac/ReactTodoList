@@ -1,0 +1,19 @@
+.textarea {
+}
+
+.buttonAddTodo {
+  margin-left: 5px;
+  background-color: rgb(118, 231, 74);
+  border: none;
+  border-radius: 5px;
+}
+
+.buttonAddTodo:hover {
+  background-color: rgb(0, 225, 255);
+  cursor: pointer;
+}
+
+.formAddTodo {
+  display: flex;
+  justify-content: center;
+}

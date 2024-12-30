@@ -46,7 +46,7 @@ img {
   border-radius: 5px;
 }
 .button__delete:hover {
-  background-color: aqua;
+  background-color: rgb(255, 0, 0);
   cursor: pointer;
 }
 

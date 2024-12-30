@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import css from './TodoEditor.module.css';
 
 class TodoEditor extends Component {
   state = {
@@ -18,13 +19,13 @@ class TodoEditor extends Component {
 
   render() {
     return (
-      <form className="" onSubmit={this.handleSubmit}>
+      <form className={css.formAddTodo} onSubmit={this.handleSubmit}>
         <textarea
-          className=""
+          className={css.textarea}
           value={this.state.message}
           onChange={this.handleChange}
         ></textarea>
-        <button type="submit" className="">
+        <button type="submit" className={css.buttonAddTodo}>
           Додати
         </button>
       </form>
