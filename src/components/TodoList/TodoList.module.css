@@ -32,13 +32,22 @@ img {
   text-align: center;
   list-style: none;
   border: solid 2px black;
+  border-radius: 8px;
   margin-bottom: 5px;
 }
 .TodoList__item__completed {
-  border: solid 2px greenyellow;
+  border: solid 2px rgb(75, 0, 248);
 }
 .button__delete {
-  margin-right: 10px;
+  margin: 5px 5px 5px 0px;
+  padding: 5px;
+  background-color: rgb(192, 81, 94);
+  border: none;
+  border-radius: 5px;
+}
+.button__delete:hover {
+  background-color: aqua;
+  cursor: pointer;
 }
 
 .text {
@@ -47,4 +56,8 @@ img {
 
 .text__completed {
   text-decoration: line-through;
+}
+
+.chekbox {
+  margin-left: 5px;
 }

@@ -19,13 +19,14 @@ function TodoList({ todos, onDeleteTodo, onCompletedTodo }) {
 
         return (
           <li key={id} className={listClass}>
-            <p className={textClass}>{text}</p>
             <input
               type="checkbox"
-              className={css}
+              className={css.chekbox}
               checked={completed}
               onChange={() => onCompletedTodo(id)}
             ></input>
+            <p className={textClass}>{text}</p>
+
             <button
               type="button"
               className={css.button__delete}
