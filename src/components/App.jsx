@@ -8,18 +8,13 @@ import initialTodos from '../todos.json';
 import { TodoEditor } from './TodoList/TodoEditor/TodoEditor';
 import { Filter } from './TodoList/TodoFilter/TodoFilter';
 import { Modal } from './Modal/Modal';
+import { Clock } from './Clock/Clock';
 
 export class App extends Component {
   state = {
     todos: initialTodos,
     filter: '',
     showModal: false,
-  };
-
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
   };
 
   deleteTodo = todoId => {
@@ -62,6 +57,9 @@ export class App extends Component {
   componentDidMount() {
     //цей метод викликається один раз після рендеру
     const todos = JSON.parse(localStorage.getItem('todos'));
+    console.log(
+      'componentDidMount: цей метод викликається один раз після рендеру'
+    );
 
     if (todos) {
       this.setState({ todos: todos });
@@ -72,10 +70,20 @@ export class App extends Component {
     //цей метод викликається завжи після зміни в стейті
 
     if (this.state.todos !== prevState.todos) {
-      console.log(`Оноволись поле todos`);
+      console.log(
+        `componentDidUpdate: цей метод викликається завжи після зміни в стейті`
+      );
       localStorage.setItem('todos', JSON.stringify(this.state.todos));
     }
   }
+
+  toggleModal = () => {
+    console.log('toggleModal');
+
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
 
   render() {
     const { todos } = this.state;
@@ -93,11 +101,12 @@ export class App extends Component {
 
     return (
       <div className={css.appContainer}>
+        <Clock />
         <button type="button" onClick={this.toggleModal}>
           Open modal
         </button>
         {this.state.showModal && (
-          <Modal>
+          <Modal onClose={this.toggleModal}>
             <div className={css.modalContent}>
               <h1>Контент модалки як чілдрен</h1>
               <p>
