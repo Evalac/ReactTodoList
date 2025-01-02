@@ -98,16 +98,18 @@ export class App extends Component {
         </button>
         {this.state.showModal && (
           <Modal>
-            <h1>Контент модалки як чілдрен</h1>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
-              temporibus libero consequuntur, eius deserunt nam fugit ab
-              deleniti delectus architecto excepturi, assumenda mollitia ullam
-              ipsa cupiditate fuga molestiae velit esse.
-            </p>
-            <button type="button" onClick={this.toggleModal}>
-              Close modal
-            </button>
+            <div className={css.modalContent}>
+              <h1>Контент модалки як чілдрен</h1>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
+                temporibus libero consequuntur, eius deserunt nam fugit ab
+                deleniti delectus architecto excepturi, assumenda mollitia ullam
+                ipsa cupiditate fuga molestiae velit esse.
+              </p>
+              <button type="button" onClick={this.toggleModal}>
+                Close modal
+              </button>
+            </div>
           </Modal>
         )}
         <TodoEditor addTodo={this.addTodo} />
