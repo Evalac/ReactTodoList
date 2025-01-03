@@ -5,10 +5,13 @@ import css from './App.module.css';
 import { TodoList } from '../components/TodoList';
 import initialTodos from '../todos.json';
 
+import tabs from '../tabs.json';
+
 import { TodoEditor } from './TodoList/TodoEditor/TodoEditor';
 import { Filter } from './TodoList/TodoFilter/TodoFilter';
 import { Modal } from './Modal/Modal';
 import { Clock } from './Clock/Clock';
+import { Tabs } from './Tabs/Tabs';
 
 export class App extends Component {
   state = {
@@ -101,6 +104,7 @@ export class App extends Component {
 
     return (
       <div className={css.appContainer}>
+        {/* <Tabs items={tabs} />
         <Clock />
         <button type="button" onClick={this.toggleModal}>
           Open modal
@@ -120,7 +124,7 @@ export class App extends Component {
               </button>
             </div>
           </Modal>
-        )}
+        )} */}
         <TodoEditor addTodo={this.addTodo} />
         <Filter value={this.state.filter} filterChange={this.filterTodo} />
         <div>
